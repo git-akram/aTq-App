@@ -15,7 +15,7 @@ class Utilisateur {
 		prenom blank:false
 		email blank:false , unique:true , email:true
 		login blank:false , unique:true
-		password blank:false , minSeize:6
+		password blank:false , minSize:6
 		isAdmin blank:false , nullable:false
     }
 }
