@@ -51,8 +51,7 @@ class BootStrap {
 									departement: departement2)
 		enseignant2.save()
 		
-		def cours1=new Cours(libelle: "Jee", description: "Developpement d'application réparties en Jee")
-		cours1.addToUtilisateur(enseignant1)
+		def cours1=new Cours(libelle: "Jee", description: "Developpement d'application réparties en Jee", utilisateur: [enseignant1,enseignant2,etudiant1])
 		cours1.save()
 		
 		def cours2=new Cours(libelle: "DCLL", description: "Developpement collaboratif et logiciels libres")
