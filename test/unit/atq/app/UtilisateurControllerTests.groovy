@@ -16,7 +16,7 @@ class UtilisateurControllerTests {
     }
 
     void testIndex() {
-        controller.login()
+        controller.index()
         assert "/utilisateur/list" == response.redirectedUrl
     }
 

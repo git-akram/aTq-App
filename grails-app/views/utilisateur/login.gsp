@@ -1,7 +1,7 @@
 <html>
 	<head>
 	<meta name="layout" content="main"/>
-	<title></title>
+	<title>Login</title>
 	<style type="text/css">
 		label{
 			float:left;

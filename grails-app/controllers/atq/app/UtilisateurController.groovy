@@ -7,7 +7,7 @@ class UtilisateurController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-        redirect(action: "login", params: params)
+        redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
@@ -101,14 +101,38 @@ class UtilisateurController {
     }
 	
 	def verify={
-		if(Utilisateur.findByLoginAndPassword(params.login,params.password) == null){
+		def utilisateur=Utilisateur.findByLoginAndPassword(params.login,params.password)
+		if(utilisateur == null){
 			flash.message = "Authentification echoué"
+			redirect(action: 'login')
 		}
 		else{
-			flash.message = "Authentification réussi"
+			session.userLogin=params.login
+			session.userPassword=params.password
+			if(utilisateur.isEnseignant()){
+				flash.message = "Enseignant"
+				redirect(controller:'Enseignant' , action:'accueil')
+			}
+			else if(utilisateur.isEtudiant()){
+				flash.message = "Etudiant"
+				redirect(controller:'Etudiant' , action:'accueil')
+			}
+			else
+				redirect(action: 'accueil')
 		}
-		redirect(action: 'login')
 	}
 	
-	def login={}
+	def logout={
+		session.userLogin=null
+		session.userPassword=null
+		redirect(action:'login')
+	}
+	
+	def login={
+		session.userLogin=null
+		session.userPassword=null
+	}
+	
+	def accueil={
+	}
 }

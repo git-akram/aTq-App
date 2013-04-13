@@ -47,8 +47,10 @@ body {
 	        box-shadow: 0 0 0.3em #255b17;
 }
 
-#grailsLogo {
-	background-color: #abbf78;
+#header {
+	background-color:#F6F6F6;
+	width:100%;
+	height:70px;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -108,7 +110,7 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #F6F6F6;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -403,6 +405,7 @@ table {
 	border-collapse: collapse;
 	width: 100%;
 	margin-bottom: 1em;
+	padding:3px;
 }
 
 tr {
@@ -593,4 +596,10 @@ th:hover, tr:hover {
 a.skip {
 	position: absolute;
 	left: -9999px;
+}
+
+div.accueil{
+	width:960px;
+	min-height:500px;
+	text-align: center;
 }
