@@ -1,33 +1,59 @@
-*.iws
+# .gitignore for Grails 1.2 and 1.3
 
+target-eclipse/
+
+# IDE support files
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*
+/eclipse
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# general HSQL database files
 *Db.properties
-
 *Db.script
 
-.settings
+# logs
+/stacktrace.log
+/test/reports
+/logs
 
-stacktrace.log
+# project release file
+/*.war
 
+# plugin release file
 /*.zip
 
-/plugin.xml
-
-/*.log
-
-/*DB.*
-
-/cobertura.ser
-
-.DS_Store
-
-/target/*
-
-/out/*
-/web-app/plugins/*
+# older plugin install locations
+/plugins
+/web-app/plugins
 /web-app/WEB-INF/classes
-/*
-/.link_to_grails_plugins/*
-/target-eclipse/*
+
+# "temporary" build files
+
+target/
+classes/
+bin/
+/bin**
 *.class
-.classpath
-.project
+
+/target
+
+# other
+*.iws
+
+#Fichiers spécifiques au OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
