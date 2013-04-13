@@ -7,8 +7,7 @@ class Utilisateur {
 	String login
 	String password
 	boolean isAdmin
-	static hasMany = [cours:Cours]
-	static belongsTo = Cours
+	static hasMany = [cours:InscriptionAuCours]
 
     static constraints = {
 		nom blank:false

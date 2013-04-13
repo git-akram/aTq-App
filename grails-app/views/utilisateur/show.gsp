@@ -82,7 +82,7 @@
 					<span id="cours-label" class="property-label"><g:message code="utilisateur.cours.label" default="Cours" /></span>
 					
 						<g:each in="${utilisateurInstance.cours}" var="c">
-						<span class="property-value" aria-labelledby="cours-label"><g:link controller="cours" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="cours-label"><g:link controller="inscriptionAuCours" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

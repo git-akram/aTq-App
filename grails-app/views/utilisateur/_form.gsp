@@ -55,6 +55,15 @@
 		<g:message code="utilisateur.cours.label" default="Cours" />
 		
 	</label>
-	<g:select name="cours" from="${atq.app.Cours.list()}" multiple="multiple" optionKey="id" size="5" value="${utilisateurInstance?.cours*.id}" class="many-to-many"/>
+	
+<ul class="one-to-many">
+<g:each in="${utilisateurInstance?.cours?}" var="c">
+    <li><g:link controller="inscriptionAuCours" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="inscriptionAuCours" action="create" params="['utilisateur.id': utilisateurInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'inscriptionAuCours.label', default: 'InscriptionAuCours')])}</g:link>
+</li>
+</ul>
+
 </div>
 
