@@ -2,12 +2,13 @@ import atq.app.Cours
 import atq.app.Departement
 import atq.app.Enseignant
 import atq.app.Etudiant
+import atq.app.InscriptionAuCours
 import atq.app.Utilisateur
 
 class BootStrap {
 
     def init = { servletContext ->
-		/*def etudiant1=new Etudiant(
+		def etudiant1=new Etudiant(
 							nom: "dupond",
 							prenom: "jack",
 							email: "jack.dupond@univ-tlse3.com",
@@ -51,7 +52,7 @@ class BootStrap {
 									departement: departement2)
 		enseignant2.save()
 		
-		def cours1=new Cours(libelle: "Jee", description: "Developpement d'application réparties en Jee", utilisateur: [enseignant1,enseignant2,etudiant1])
+		def cours1=new Cours(libelle: "Jee", description: "Developpement d'application réparties en Jee")
 		cours1.save()
 		
 		def cours2=new Cours(libelle: "DCLL", description: "Developpement collaboratif et logiciels libres")
@@ -61,7 +62,31 @@ class BootStrap {
 		cours3.save()
 		
 		def cours4=new Cours(libelle: "AL", description: "Architecture logiciel")
-		cours4.save()*/
+		cours4.save()
+		
+		def inscription1=new InscriptionAuCours(utilisateur:  enseignant1, cours: cours1)
+		inscription1.save()
+		
+		def inscription2=new InscriptionAuCours(utilisateur:  enseignant2, cours: cours1)
+		inscription2.save()
+		
+		def inscription3=new InscriptionAuCours(utilisateur:  etudiant1, cours: cours1)
+		inscription3.save()
+		
+		def inscription4=new InscriptionAuCours(utilisateur:  enseignant1, cours: cours2)
+		inscription4.save()
+		
+		def inscription5=new InscriptionAuCours(utilisateur:  etudiant1, cours: cours2)
+		inscription5.save()
+		
+		def inscription6=new InscriptionAuCours(utilisateur:  enseignant2, cours: cours3)
+		inscription6.save()
+		
+		def inscription7=new InscriptionAuCours(utilisateur:  etudiant1, cours: cours3)
+		inscription7.save()
+		
+		def inscription8=new InscriptionAuCours(utilisateur:  etudiant2, cours: cours3)
+		inscription8.save()
 
     }
     def destroy = {

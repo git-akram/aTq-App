@@ -1,3 +1,5 @@
+<%@ page import="atq.app.InscriptionAuCours" %>
+<%@ page import="atq.app.Cours" %>
 <html>
 	<head>
 	<meta name="layout" content="main"/>
@@ -10,13 +12,12 @@
 	<body>
 		<div class="accueil">
 			<table align="center">
-			<tr><td>Cours</td><td>Enseignants</td></tr>		
-				<g:each in="${listDeCours}" status="i" var="coursInstance">
+			<tr><td>Cours</td><td>Enseignants</td></tr>	
+				<g:each in="${listInscriptions}" status="i" var="coursInstance">
 					<tr>
-					<td>${fieldValue(bean: coursInstance, field: "libelle")}</td>
+					<td>${fieldValue(bean: coursInstance.cours, field: "libelle")}</td>
 					<td>
-						<g:if test="${coursInstance.utilisateurs=null}">
-							<g:each in="${coursInstance.utilisateurs}" status="j" var="enseignantInstance">
+							<g:each in="${InscriptionAuCours.findAllByCours(coursInstance.cours).utilisateur}" status="j" var="enseignantInstance">
 								<g:if test="${enseignantInstance.isEnseignant()}">
 									<g:link action="menu" idCours="${coursInstance.id}" idEnseignant="${enseignantInstance.id}">
 									${fieldValue(bean: enseignantInstance, field: "nom")}&nbsp;
@@ -24,7 +25,6 @@
 									</g:link><br>
 								</g:if>
 							</g:each>
-						</g:if>
 					</td>
 					</tr>		
 				</g:each>

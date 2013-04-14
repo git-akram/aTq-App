@@ -101,6 +101,9 @@ class EnseignantController {
     }
 	
 	def accueil={
-		[listDeCours:Cours.list()]
+		if(session.userLogin==null || session.userPassword==null)
+			redirect(controller='Utilisateur' , action= 'logout')
+		def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
+		[listInscriptions:InscriptionAuCours.findAllByUtilisateur(utilisateur)]
 	}
 }

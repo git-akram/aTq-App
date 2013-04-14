@@ -63,7 +63,16 @@
 		<g:message code="enseignant.cours.label" default="Cours" />
 		
 	</label>
-	<g:select name="cours" from="${atq.app.Cours.list()}" multiple="multiple" optionKey="id" size="5" value="${enseignantInstance?.cours*.id}" class="many-to-many"/>
+	
+<ul class="one-to-many">
+<g:each in="${enseignantInstance?.cours?}" var="c">
+    <li><g:link controller="inscriptionAuCours" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="inscriptionAuCours" action="create" params="['enseignant.id': enseignantInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'inscriptionAuCours.label', default: 'InscriptionAuCours')])}</g:link>
+</li>
+</ul>
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: enseignantInstance, field: 'departement', 'error')} required">
