@@ -25,7 +25,7 @@
 					<g:link controller="Utilisateur" action="login">Connexion</g:link>
 				</g:if>
 				<g:if test="${session.userLogin!=null}">
-					Logged as ${session.userLogin}&nbsp;|&nbsp;
+					Logged as ${session.userName}&nbsp;|&nbsp;
 					<g:link controller="Utilisateur" action="logout">Deconnexion</g:link>
 				</g:if>
 			</div>

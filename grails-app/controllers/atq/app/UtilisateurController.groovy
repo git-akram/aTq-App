@@ -109,6 +109,7 @@ class UtilisateurController {
 		else{
 			session.userLogin=params.login
 			session.userPassword=params.password
+			session.userName=utilisateur.nom+" "+utilisateur.prenom
 			if(utilisateur.isEnseignant()){
 				flash.message = "Enseignant"
 				redirect(controller:'Enseignant' , action:'accueil')
@@ -125,6 +126,7 @@ class UtilisateurController {
 	def logout={
 		session.userLogin=null
 		session.userPassword=null
+		session.userName=null
 		redirect(action:'login')
 	}
 	
@@ -134,5 +136,7 @@ class UtilisateurController {
 	}
 	
 	def accueil={
+		if(session.userLogin==null || session.userPassword==null)
+			redirect(controller='Utilisateur' , action= 'logout')
 	}
 }
