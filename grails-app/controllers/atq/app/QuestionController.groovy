@@ -99,4 +99,44 @@ class QuestionController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def newQuestion(Long id){
+		[id:id]
+	}
+	
+	def affectReponse(Long id){
+		[id:id]
+		def questionInstance=new Question(contenu : params.contenu , 
+										  dateCreation : params.dateCreation , 
+										  aPoser : params.aPoser , 
+										  cours : Cours.get(params.cours.id) , 
+										  enseignant : Enseignant.get(params.enseignant.id) )
+		
+		def reponseA=new ReponsePropose(intitule : params.reponseA)
+		reponseA.save()
+		questionInstance.addToReponsePropose(reponseA)
+		
+		def reponseB=new ReponsePropose(intitule : params.reponseB)
+		reponseB.save()
+		questionInstance.addToReponsePropose(reponseB)
+		
+		if(params.reponseC != ""){
+			def reponseC=new ReponsePropose(intitule : params.reponseC)
+			reponseC.save()
+			questionInstance.addToReponsePropose(reponseC)
+		}
+		if(params.reponseD != ""){
+			def reponseD=new ReponsePropose(intitule : params.reponseD)
+			reponseD.save()
+			questionInstance.addToReponsePropose(reponseD)
+		}
+			
+		if(questionInstance.save(flush:true)){
+			redirect(controller:'Enseignant' , action:'declencher')
+		}
+		else{
+			flash.message="An error has occured while creating the question"
+			redirect(action:'newQuestion', id:id)
+		}
+	}
 }

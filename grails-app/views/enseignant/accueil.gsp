@@ -9,8 +9,8 @@
 	</head>
 	<body>
 		<div class="accueil">
-			<table align="center">
-			<tr><td>Cours</td><td>Description</td></tr>		
+			<table class="table-enseignant" align="center">
+			<tr><th>Cours</th><th>Description</th></tr>		
 				<g:each in="${listInscriptions}" status="i" var="inscriptionInstance">
 					<tr>
 					<td><g:link action="menu" id="${inscriptionInstance.cours.id}">${fieldValue(bean: inscriptionInstance.cours, field: "libelle")}</g:link></td>

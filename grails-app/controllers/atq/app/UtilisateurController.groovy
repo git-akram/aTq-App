@@ -107,6 +107,7 @@ class UtilisateurController {
 			redirect(action: 'login')
 		}
 		else{
+			session.userId=utilisateur.getId()
 			session.userLogin=params.login
 			session.userPassword=params.password
 			session.userName=utilisateur.nom+" "+utilisateur.prenom
@@ -124,6 +125,7 @@ class UtilisateurController {
 	}
 	
 	def logout={
+		session.userId=null
 		session.userLogin=null
 		session.userPassword=null
 		session.userName=null
@@ -132,7 +134,9 @@ class UtilisateurController {
 	
 	def login={
 		session.userLogin=null
+		session.userLogin=null
 		session.userPassword=null
+		session.userName=null
 	}
 	
 	def accueil={
