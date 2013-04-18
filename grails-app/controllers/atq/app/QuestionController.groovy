@@ -107,7 +107,7 @@ class QuestionController {
 	def affectReponse(Long id){
 		[id:id]
 		def questionInstance=new Question(contenu : params.contenu , 
-										  dateCreation : params.dateCreation , 
+										  dateCreation : new Date() , 
 										  aPoser : params.aPoser , 
 										  cours : Cours.get(params.idCours) , 
 										  enseignant : Enseignant.get(params.idEnseignant) )
@@ -132,11 +132,30 @@ class QuestionController {
 		}
 			
 		if(questionInstance.save(flush:true)){
-			redirect(controller:'Enseignant' , action:'declencher')
+			redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
 		}
 		else{
 			flash.message="An error has occured while creating the question"
 			redirect(action:'newQuestion', id:id)
 		}
+	}
+	
+	def declencher(Long id){
+		for (q in Question.list()){
+			q.setaPoser(false)
+			q.save()
+		}
+			
+		def question = Question.get(id)
+		question.setaPoser(true)
+		question.save()
+		redirect(controller:'Enseignant' , action:'listQuestion' , id:params.idCours)
+	}
+	
+	def cloturer(Long id){	
+		def question = Question.get(id)
+		question.setaPoser(false)
+		question.save()
+		redirect(controller:'Enseignant' , action:'listQuestion' , id:params.idCours)
 	}
 }
