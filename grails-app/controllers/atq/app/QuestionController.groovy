@@ -109,8 +109,8 @@ class QuestionController {
 		def questionInstance=new Question(contenu : params.contenu , 
 										  dateCreation : params.dateCreation , 
 										  aPoser : params.aPoser , 
-										  cours : Cours.get(params.cours.id) , 
-										  enseignant : Enseignant.get(params.enseignant.id) )
+										  cours : Cours.get(params.idCours) , 
+										  enseignant : Enseignant.get(params.idEnseignant) )
 		
 		def reponseA=new ReponsePropose(intitule : params.reponseA)
 		reponseA.save()
