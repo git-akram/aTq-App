@@ -123,7 +123,11 @@ class EnseignantController {
 	def visualiser(Long id){
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')
-		[id:id]
+		def question=Question.findByAPoser(true)
+		//if(question!=null)
+			def listReponse=Reponse.findAllByQuestion(Question.get(question.id))
+		[id:id,question:question,listReponse:listReponse]
+		
 	}
 	
 }
