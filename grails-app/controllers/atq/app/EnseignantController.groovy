@@ -112,13 +112,7 @@ class EnseignantController {
 			redirect(controller='Utilisateur' , action= 'logout')
 		[id:id]
 	}
-	
-	def newQuestion(Long id){
-		if(session.userLogin==null || session.userPassword==null)
-			redirect(controller='Utilisateur' , action= 'logout')
-		[id:id]
-	}
-	
+
 	def declencher(Long id){
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')

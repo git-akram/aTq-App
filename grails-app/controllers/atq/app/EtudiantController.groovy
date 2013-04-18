@@ -112,13 +112,8 @@ class EtudiantController {
 		redirect(controller='Utilisateur' , action= 'logout')
 		println(params.idCours)
 		println(params.idEnseignant)
-		[params: params]
-
-		
+		[params: params]	
 	}
-	
-		
 
-		
-	}
+}
 

@@ -20,7 +20,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'aPoser', 'error')} ">
 	<label for="aPoser">
-		<g:message code="question.aPoser.label" default="AP oser" />
+		<g:message code="question.aPoser.label" default="A Poser" />
 		
 	</label>
 	<g:checkBox name="aPoser" value="${questionInstance?.aPoser}" />

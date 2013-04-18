@@ -87,9 +87,7 @@ class BootStrap {
 		
 		def inscription8=new InscriptionAuCours(utilisateur:  etudiant2, cours: cours3)
 		inscription8.save()*/
-		
-		
-		
+
     }
     def destroy = {
     }
