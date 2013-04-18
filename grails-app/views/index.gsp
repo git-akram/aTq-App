@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
+		<title>Welcome to aTq</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -82,6 +82,7 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		
 		<div id="status" role="complementary">
 			<h1>Application Status</h1>
 			<ul>

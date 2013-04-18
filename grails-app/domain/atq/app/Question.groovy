@@ -7,7 +7,8 @@ class Question {
 	static hasOne = [enseignant:Enseignant]
 	static belongsTo = [cours:Cours]
 	static hasMany = [reponse:Reponse , reponsePropose:ReponsePropose]
-
+	
+	
     static constraints = {
 		contenu blank:false
 		dateCreation blank:false
