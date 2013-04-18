@@ -24,8 +24,6 @@
 				<thead>
 					<tr>
 					
-						<th><g:message code="reponse.commentaire.label" default="Commentaire" /></th>
-					
 						<th><g:message code="reponse.etudiant.label" default="Etudiant" /></th>
 					
 						<th><g:message code="reponse.question.label" default="Question" /></th>
@@ -38,9 +36,7 @@
 				<g:each in="${reponseInstanceList}" status="i" var="reponseInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${reponseInstance.id}">${fieldValue(bean: reponseInstance, field: "commentaire")}</g:link></td>
-					
-						<td>${fieldValue(bean: reponseInstance, field: "etudiant")}</td>
+						<td><g:link action="show" id="${reponseInstance.id}">${fieldValue(bean: reponseInstance, field: "etudiant")}</g:link></td>
 					
 						<td>${fieldValue(bean: reponseInstance, field: "question")}</td>
 					

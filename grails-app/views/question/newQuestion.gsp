@@ -25,7 +25,7 @@
 							<g:message code="question.aPoser.label" default="Déclencher" />
 							
 						</label>
-						<g:select name="aPoser" from="${[true,false]}" required="" value="" />
+						<g:select name="aPoser" from="${['Oui','Non']}" required="" value="" />
 					</div>
 					
 					<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'contenu', 'error')} required">

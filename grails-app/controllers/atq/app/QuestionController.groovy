@@ -106,9 +106,20 @@ class QuestionController {
 	
 	def affectReponse(Long id){
 		[id:id]
+		boolean aPoser
+		if(params.aPoser=='Oui'){
+			aPoser=true
+			for (q in Question.list()){
+				q.setaPoser(false)
+				q.save()
+			}
+		}
+		else if(params.aPoser=='Non'){
+			aPoser=false
+		}
 		def questionInstance=new Question(contenu : params.contenu , 
 										  dateCreation : new Date() , 
-										  aPoser : params.aPoser , 
+										  aPoser : aPoser , 
 										  cours : Cours.get(params.idCours) , 
 										  enseignant : Enseignant.get(params.idEnseignant) )
 		

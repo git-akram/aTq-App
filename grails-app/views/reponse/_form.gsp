@@ -2,14 +2,6 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: reponseInstance, field: 'commentaire', 'error')} required">
-	<label for="commentaire">
-		<g:message code="reponse.commentaire.label" default="Commentaire" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="commentaire" name="commentaire.id" from="${atq.app.Commentaire.list()}" optionKey="id" required="" value="${reponseInstance?.commentaire?.id}" class="many-to-one"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: reponseInstance, field: 'etudiant', 'error')} required">
 	<label for="etudiant">
 		<g:message code="reponse.etudiant.label" default="Etudiant" />

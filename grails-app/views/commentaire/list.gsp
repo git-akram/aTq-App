@@ -26,6 +26,8 @@
 					
 						<g:sortableColumn property="intitule" title="${message(code: 'commentaire.intitule.label', default: 'Intitule')}" />
 					
+						<th><g:message code="commentaire.reponse.label" default="Reponse" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -33,6 +35,8 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${commentaireInstance.id}">${fieldValue(bean: commentaireInstance, field: "intitule")}</g:link></td>
+					
+						<td>${fieldValue(bean: commentaireInstance, field: "reponse")}</td>
 					
 					</tr>
 				</g:each>

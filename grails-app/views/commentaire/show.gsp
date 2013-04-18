@@ -32,6 +32,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${commentaireInstance?.reponse}">
+				<li class="fieldcontain">
+					<span id="reponse-label" class="property-label"><g:message code="commentaire.reponse.label" default="Reponse" /></span>
+					
+						<span class="property-value" aria-labelledby="reponse-label"><g:link controller="reponse" action="show" id="${commentaireInstance?.reponse?.id}">${commentaireInstance?.reponse?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
