@@ -123,10 +123,22 @@ class EnseignantController {
 	def visualiser(Long id){
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')
-		def question=Question.findByAPoser(true)
-		//if(question!=null)
+			
+		def question=Question.findByAPoserAndCours(true,Cours.get(id))
+		
+		if(question!=null){
+			def repParChoix=[:]
+			for(choix in ReponsePropose.findAllByQuestion(Question.get(question.id))){
+				repParChoix[choix.id]=Reponse.findAllByQuestionAndReponsePropose(Question.get(question.id),ReponsePropose.get(choix.id)).size()
+			}
+			println(repParChoix)
 			def listReponse=Reponse.findAllByQuestion(Question.get(question.id))
-		[id:id,question:question,listReponse:listReponse]
+			def repTotal=listReponse.size()
+			def choixTotal=repParChoix.size()
+			[id:id,question:question,listReponse:listReponse,repTotal:repTotal,choixTotal:choixTotal]
+		}
+		else
+			[id:id,question:question]
 		
 	}
 	
