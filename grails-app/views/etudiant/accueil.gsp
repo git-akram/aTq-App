@@ -10,6 +10,7 @@
 	
 	</head>
 	<body>
+	<div class="message">${flash.message}</div>
 		<div class="accueil" align="center">
 			<table align="center">
 			<tr><td>Cours</td><td>Enseignants</td></tr>	

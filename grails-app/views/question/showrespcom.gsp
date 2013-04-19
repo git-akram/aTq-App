@@ -1,5 +1,8 @@
 <%@ page import="atq.app.InscriptionAuCours" %>
-<%@ page import="atq.app.Cours" %>
+<%@ page import="atq.app.Utilisateur" %>
+<%@ page import="atq.app.Reponse" %>
+<%@ page import="atq.app.Commentaire" %>
+
 <html>
 	<head>
 	<meta name="layout" content="main"/>
@@ -12,19 +15,19 @@
 	<body>
 		<div class="accueil" align="center">
 			<table align="center">
-			<tr><td>reponse</td><td>Commentaire</td></tr>	
-				<g:each in="${listQuestion}" status="i" var="questionInstance">
+			<tr><th>reponse</th><th>Commentaire</th></tr>	
+				<g:each in="${listQuestions}" status="i" var="questionInstance">
 					<tr>
 					
 					
-							<g:each in="${Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword))}" status="j" var="reponseInstance">
+
 								
 									
-									<td>${(reponseInstance.reponsePropose).intitule}</td>
-									<td>${(reponseInstance.commentaire).intitule}</td>
+									<td>${Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)).reponsePropose.intitule}</td>
+									<g:if test="${Commentaire.findByReponse(Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)))!=null }">
+									<td>${Commentaire.findByReponse(Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword))).intitule}</td>
+									</g:if>
 									
-							
-							</g:each>
 					
 					</tr>		
 				</g:each>

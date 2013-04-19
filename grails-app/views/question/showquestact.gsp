@@ -17,14 +17,16 @@
 					
 						<g:if test="${questionCourante!=null}">
 
-								<g:form action="verify" style="padding-left:200px;">
+								<g:form action="addReponse" style="padding-left:200px;" params="${[idQuestion:questionCourante.id, idEtudiant:session.userId]}">
 									<div style="width:220px;">
 									<label>${questionCourante.contenu}</label><br>
+								
 									<g:each in="${questionCourante.reponsePropose}" status="j" var="reponseInstance">
 									
-									<g:radio name="choix" value="${reponseInstance.id}"/>${reponseInstance.intitule}<br>
 									
-							
+									<g:radio name="choix" value="${reponseInstance.id}" checked="false"/>${reponseInstance.intitule}<br>
+									
+									
 									</g:each>
 									<input type="submit" value="envoyer"/>
 									</div>

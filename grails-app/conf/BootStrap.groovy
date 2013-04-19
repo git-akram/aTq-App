@@ -8,7 +8,7 @@ import atq.app.Utilisateur
 class BootStrap {
 
     def init = { servletContext ->
-		def etudiant1=new Etudiant(
+		/*def etudiant1=new Etudiant(
 							nom: "dupond",
 							prenom: "jack",
 							email: "jack.dupond@univ-tlse3.com",
@@ -86,7 +86,7 @@ class BootStrap {
 		inscription7.save()
 		
 		def inscription8=new InscriptionAuCours(utilisateur:  etudiant2, cours: cours3)
-		inscription8.save()
+		inscription8.save()*/
 
     }
     def destroy = {

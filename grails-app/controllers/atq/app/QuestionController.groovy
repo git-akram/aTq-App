@@ -106,9 +106,12 @@ class QuestionController {
 		
 		println(params.idc)
 		println(params.ide)
+		
 		//def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
 		def cours=Cours.get(params.idc)
 		def ens=Enseignant.get(params.ide)
+	
+	
 		[listQuestions:Question.findAllByCoursAndEnseignant(cours,ens)]
 		
 	}
@@ -201,4 +204,28 @@ class QuestionController {
 		question.save()
 		redirect(controller:'Enseignant' , action:'listQuestion' , id:params.idCours)
 	}
+	
+	def addReponse(){
+		def quest=Question.get(params.idQuestion)
+		println(quest)
+		def etud=Etudiant.get(params.idEtudiant)
+		println(etud)
+		def rep=ReponsePropose.get(params.choix)
+		if(quest.isaPoser()==true){
+			
+			def reponse=new Reponse(
+				question: quest,
+				etudiant: etud,
+				reponsePropose: rep,
+				)
+				reponse.save()
+				flash.message = "Votre reponse a été pris en compte"
+		
+		}else
+				flash.message = "Votre reponse n'a pas été pris en compte"
+			redirect(controller:'Etudiant',action:'accueil')
+		
+		
+	}
 }
+
