@@ -15,7 +15,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:postgresql://localhost:5432/aTq"
+            url = "jdbc:postgresql://localhost:5432/db_aTq"
 			driverClassName = "org.postgresql.Driver"
 			username = "postgres"
 			password = "mehdi"

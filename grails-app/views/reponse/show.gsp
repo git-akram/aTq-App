@@ -23,15 +23,6 @@
 			</g:if>
 			<ol class="property-list reponse">
 			
-				<g:if test="${reponseInstance?.commentaire}">
-				<li class="fieldcontain">
-					<span id="commentaire-label" class="property-label"><g:message code="reponse.commentaire.label" default="Commentaire" /></span>
-					
-						<span class="property-value" aria-labelledby="commentaire-label"><g:link controller="commentaire" action="show" id="${reponseInstance?.commentaire?.id}">${reponseInstance?.commentaire?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${reponseInstance?.etudiant}">
 				<li class="fieldcontain">
 					<span id="etudiant-label" class="property-label"><g:message code="reponse.etudiant.label" default="Etudiant" /></span>

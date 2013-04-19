@@ -10,7 +10,7 @@
 	<body>
 		<fieldset class="form">
 			<div class="message">${flash.message}</div>
-			<g:form action="affectReponse" id="${id }">
+			<g:form action="affectReponse" id="${id }" params="${[idCours:id , idEnseignant:session.userId]}">
 					
 					<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'contenu', 'error')} required">
 						<label for="contenu">
@@ -19,37 +19,13 @@
 						</label>
 						<g:textArea name="contenu" required="" value="${questionInstance?.contenu}"/>
 					</div>
-
-					<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'dateCreation', 'error')} required">
-						<label for="dateCreation">
-							<g:message code="question.dateCreation.label" default="Date Creation" />
-							<span class="required-indicator">*</span>
-						</label>
-						<g:datePicker name="dateCreation" precision="day" value=""  />
-					</div>
 					
 					<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'aPoser', 'error')} ">
 						<label for="aPoser">
 							<g:message code="question.aPoser.label" default="Déclencher" />
 							
 						</label>
-						<g:select name="aPoser" from="${[true,false]}" required="" value="" />
-					</div>
-
-					<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'cours', 'error')} required">
-						<label for="cours">
-							<g:message code="question.cours.label" default="&nbsp;" />
-							<span class="required-indicator"></span>
-						</label>
-						<g:select id="cours" name="cours.id" from="${atq.app.Cours.get(id)}" optionKey="id" required="" value="" class="many-to-one"/>
-					</div>
-					
-					<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'enseignant', 'error')} required">
-						<label for="enseignant">
-							<g:message code="question.enseignant.label" default="&nbsp;" />
-							<span class="required-indicator"></span>
-						</label>
-						<g:select id="enseignant" name="enseignant.id" from="${atq.app.Enseignant.get(session.userId)}" optionKey="id" required="" value="" class="many-to-one"/>
+						<g:select name="aPoser" from="${['Oui','Non']}" required="" value="" />
 					</div>
 					
 					<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'contenu', 'error')} required">
@@ -85,7 +61,7 @@
 					</div>
 					<br>
 					<fieldset class="buttons">
-						<g:submitButton name="Suivant" value="${message(code: 'Ajouter un choix', default: 'Ajouter un choix')}" />
+						<g:submitButton name="Suivant" value="${message(code: 'Enregistrer', default: 'Enregistrer')}" />
 					</fieldset>
 			</g:form>	
 		</fieldset>
