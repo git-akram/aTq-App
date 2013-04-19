@@ -107,16 +107,10 @@ class EnseignantController {
 		[listInscriptions:InscriptionAuCours.findAllByUtilisateur(utilisateur)]
 	}
 	
-	def menu(Long id){
-		if(session.userLogin==null || session.userPassword==null)
-			redirect(controller='Utilisateur' , action= 'logout')
-		[id:id]
-	}
-	
 	def listQuestion(Long id){
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')
-		[id:id , questionList:Question.findAllByEnseignantAndCours(Enseignant.get(session.userId),Cours.get(id)).sort{[it.dateCreation]}]
+		[id:id , questionList:Question.findAllByEnseignantAndCours(Enseignant.get(session.userId),Cours.get(id)).sort{[it.dateCreation] ? -1 : 1 }]
 		
 	}
 	
@@ -124,22 +118,28 @@ class EnseignantController {
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')
 			
-		def question=Question.findByAPoserAndCours(true,Cours.get(id))
+		def question=Question.get(params.idQuestion)
 		
 		if(question!=null){
+			
 			def repParChoix=[:]
-			for(choix in ReponsePropose.findAllByQuestion(Question.get(question.id))){
-				repParChoix[choix.id]=Reponse.findAllByQuestionAndReponsePropose(Question.get(question.id),ReponsePropose.get(choix.id)).size()
+			for(choix in ReponsePropose.findAllByQuestion(question)){
+				repParChoix[choix.id]=[intitule:choix.intitule , nbr:Reponse.findAllByQuestionAndReponsePropose(question,choix).size() ]
 			}
-			println(repParChoix)
+
+			def stat=""
+			for(choix in repParChoix){
+				stat+=",['"+choix.value.intitule+"' , "+choix.value.nbr+"]"	
+			}
+			
 			def listReponse=Reponse.findAllByQuestion(Question.get(question.id))
 			def repTotal=listReponse.size()
 			def choixTotal=repParChoix.size()
-			[id:id,question:question,listReponse:listReponse,repTotal:repTotal,choixTotal:choixTotal]
+			
+			[id:id,question:question,listReponse:listReponse,repTotal:repTotal,choixTotal:choixTotal,stat:stat]
 		}
 		else
-			[id:id,question:question]
-		
+			[id:id,question:question]	
 	}
 	
 }

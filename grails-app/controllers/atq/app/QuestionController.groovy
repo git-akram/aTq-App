@@ -152,21 +152,46 @@ class QuestionController {
 	}
 	
 	def declencher(Long id){
-		for (q in Question.list()){
+		for (q in Question.findAllByCoursAndEnseignant(Cours.get(id),Enseignant.get(session.userId))){
 			q.setaPoser(false)
 			q.save()
 		}
 			
-		def question = Question.get(id)
-		question.setaPoser(true)
-		question.save()
-		redirect(controller:'Enseignant' , action:'listQuestion' , id:params.idCours)
+		def question = Question.get(params.idQuestion)
+		
+		def questionInstance=new Question(contenu : question.contenu ,
+										dateCreation : new Date() ,
+										aPoser : true ,
+										cours : question.cours ,
+										enseignant : question.enseignant )
+		
+		questionInstance.save()
+		redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
 	}
 	
 	def cloturer(Long id){	
-		def question = Question.get(id)
+		def question = Question.get(params.idQuestion)
 		question.setaPoser(false)
 		question.save()
-		redirect(controller:'Enseignant' , action:'listQuestion' , id:params.idCours)
+		redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
+	}
+	
+	def supprimer(Long id){
+		def questionInstance = Question.get(params.idQuestion)
+		if (!questionInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), params.idQuestion])
+			redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
+			return
+		}
+	
+		try {
+			questionInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'question.label', default: 'Question'), params.idQuestion])
+			redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'question.label', default: 'Question'), params.idQuestion])
+			redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
+		}
 	}
 }
