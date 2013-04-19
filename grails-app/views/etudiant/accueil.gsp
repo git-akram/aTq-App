@@ -19,7 +19,7 @@
 					<td>
 							<g:each in="${InscriptionAuCours.findAllByCours(coursInstance.cours).utilisateur}" status="j" var="enseignantInstance">
 								<g:if test="${enseignantInstance.isEnseignant()}">
-									<g:link action="menu" params="[idCours:coursInstance.id,idEnseignant:enseignantInstance.id]">
+									<g:link action="menu" params="[idCours:coursInstance.cours.id,idEnseignant:enseignantInstance.id]">
 									${fieldValue(bean: enseignantInstance, field: "nom")}&nbsp;
 									${fieldValue(bean: enseignantInstance, field: "prenom")}
 									</g:link><br>

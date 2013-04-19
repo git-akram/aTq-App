@@ -116,14 +116,20 @@ class QuestionController {
 	def showquestact={
 		
 		if(session.userLogin==null || session.userPassword==null)
-		redirect(controller='Utilisateur' , action= 'logout')
+			redirect(controller='Utilisateur' , action= 'logout')
 		
-		println(params.idc)
-		println(params.ide)
-		//def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
+		//println(params.idc)
+		//println(params.ide)
+
 		def cours=Cours.get(params.idc)
+		println(cours)
 		def ens=Enseignant.get(params.ide)
-		[listQuestions:Question.findAllByCoursAndEnseignant(cours,ens)]
+		println("affichage objet")
+		println(ens)
+		
+		println("affichage question")
+		println(Question.findByCoursAndEnseignantAndAPoser(Cours.get(params.idc),Enseignant.get(params.ide),true))
+		[questionCourante:Question.findByCoursAndEnseignantAndAPoser(cours,ens,true)]
 	}
 	
 	def newQuestion(Long id){

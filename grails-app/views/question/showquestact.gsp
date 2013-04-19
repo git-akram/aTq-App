@@ -12,23 +12,28 @@
 	<body>
 		<div class="accueil" align="center">
 			
-				<g:each in="${listQuestion}" status="i" var="questionInstance">
+				
 				
 					
-						<g:if test="${questionInstance.findByAPoser(true)!=null}">
+						<g:if test="${questionCourante!=null}">
 
-								
-									<label>${fieldValue(bean: questionInstance, field: "contenu")}</label>
-									<g:each in="${questionInstance.reponsePropose}" status="j" var="reponseInstance">
+								<g:form action="verify" style="padding-left:200px;">
+									<div style="width:220px;">
+									<label>${questionCourante.contenu}</label><br>
+									<g:each in="${questionCourante.reponsePropose}" status="j" var="reponseInstance">
 									
-									<g:radio name="${reponseInstance.intitule}" value="${reponseInstance.intitule}"/>
+									<g:radio name="choix" value="${reponseInstance.id}"/>${reponseInstance.intitule}<br>
 									
 							
 									</g:each>
 									<input type="submit" value="envoyer"/>
-					</g:if>
+									</div>
+									</g:form>
+					     </g:if>
+					
+					
 						
-				</g:each>
+			
 				
 		</div>
 	</body>

@@ -110,8 +110,6 @@ class EtudiantController {
 	def menu={
 		if(session.userLogin==null || session.userPassword==null)
 		redirect(controller='Utilisateur' , action= 'logout')
-		println(params.idCours)
-		println(params.idEnseignant)
 		[params: params]	
 	}
 
