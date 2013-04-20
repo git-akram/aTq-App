@@ -2,7 +2,7 @@ dataSource {
     pooled = true
     driverClassName = "org.postgresql.Driver"
     username = "postgres"
-    password = "mehdi"
+    password = "admin"
 	dialect = org.hibernate.dialect.PostgreSQLDialect
 }
 hibernate {
@@ -18,7 +18,7 @@ environments {
             url = "jdbc:postgresql://localhost:5432/db_aTq"
 			driverClassName = "org.postgresql.Driver"
 			username = "postgres"
-			password = "mehdi"
+			password = "admin"
         }
     }
     test {
