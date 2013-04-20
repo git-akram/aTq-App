@@ -10,17 +10,16 @@
 	
 	</head>
 	<body>
-		<div class="conteneur" align="center">
+		<div class="conteneur">
 			<g:render template="/Etudiant/menu"></g:render>
 			<g:if test="${questionCourante!=null}">
-				<g:form action="addReponse" style="padding-left:200px;" params="${[idQuestion:questionCourante.id, idEtudiant:session.userId]}">
-					<div style="width:220px;">
-						<label>${questionCourante.contenu}</label><br>		
-						<g:each in="${questionCourante.reponsePropose}" status="j" var="reponseInstance">		
-							<g:radio name="choix" value="${reponseInstance.id}" checked="false"/>${reponseInstance.intitule}<br>			
+				<g:form class="formular" action="addReponse" style="padding-left:200px;" params="${[idQuestion:questionCourante.id, idEtudiant:session.userId]}">
+						<h3>${questionCourante.contenu}</h3><br>		
+						<g:each in="${questionCourante.reponsePropose}" status="j" var="reponseInstance">
+							<label>${reponseInstance.intitule}</label>		
+							<g:radio name="choix" value="${reponseInstance.id}" checked="false" style="float:left;margin-right:3px;"/><br><br>			
 						</g:each>
-						<input type="submit" value="envoyer"/>
-					</div>
+						<g:submitButton name="envoyer" value="envoyer"/>
 				</g:form>
 			</g:if>
 		</div>

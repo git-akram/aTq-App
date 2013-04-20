@@ -19,7 +19,7 @@
 								<g:message code="question.contenu.label" default="Libelle" />
 								<span class="required-indicator">*</span>
 							</label>
-							<g:textArea name="contenu" required="" value="${questionInstance?.contenu}"/>
+							<g:textArea name="contenu" required="" value=""/>
 						
 						
 						

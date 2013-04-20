@@ -16,7 +16,7 @@
 		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'glyphicons-halflings-white.png')}">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'enseignant.css')}" type="text/css">
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'design.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'formular.css')}" type="text/css">
 		<!--<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">-->
 		<g:layoutHead/>
@@ -38,7 +38,7 @@
 			</div>
 		</div>
 		<g:layoutBody/>
-		<div class="footer" role="contentinfo"><h3>aTq-App</h3></div>
+		<div class="footer" role="contentinfo"><h3>aTq-App (Université Toulouse III Paul Sabatier)</h3></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>
 		<r:layoutResources />
