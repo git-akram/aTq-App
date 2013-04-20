@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div class="conteneur">
-			<table class="table-enseignant" align="center">
+			<table align="center">
 			<tr><th>Cours</th><th>Description</th></tr>		
 				<g:each in="${listInscriptions}" status="i" var="inscriptionInstance">
 					<tr>

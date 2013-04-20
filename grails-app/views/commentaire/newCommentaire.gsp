@@ -2,7 +2,7 @@
 <html>
 	<head>
 	<meta name="layout" content="main"/>
-	<title>Nouvelle question</title>
+	<title>Commenter</title>
 	<style type="text/css">
 		
 	</style>
