@@ -6,7 +6,7 @@
 <html>
 	<head>
 	<meta name="layout" content="main"/>
-	<title>Question Courante</title>
+	<title>Voir les commentaires</title>
 	<style type="text/css">
 		
 	</style>

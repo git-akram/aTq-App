@@ -3,7 +3,7 @@
 <html>
 	<head>
 	<meta name="layout" content="main"/>
-	<title>Consulter les commentaire</title>
+	<title>Répondre</title>
 	<style type="text/css">
 		
 	</style>

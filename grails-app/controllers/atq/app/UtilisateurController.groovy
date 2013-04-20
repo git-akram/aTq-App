@@ -110,6 +110,7 @@ class UtilisateurController {
 			session.userId=utilisateur.getId()
 			session.userLogin=params.login
 			session.userPassword=params.password
+			session.userAdmin=utilisateur.isAdmin
 			session.userName=utilisateur.nom+" "+utilisateur.prenom
 			if(utilisateur.isEnseignant()){
 				redirect(controller:'Enseignant' , action:'accueil')
@@ -121,7 +122,7 @@ class UtilisateurController {
 				if(utilisateur.isAdmin!=true)
 					redirect(action: 'accueil')
 				else
-					render(view:"administration")
+					render(view:'administration')
 		}
 	}
 	
@@ -144,5 +145,9 @@ class UtilisateurController {
 	def accueil={
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')
+	}
+	
+	def administration={
+		
 	}
 }

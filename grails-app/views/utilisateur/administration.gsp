@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to aTq</title>
+		<title>Administation</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -81,8 +81,16 @@
 		</style>
 	</head>
 	<body>
-		<div class="conteneur" align="center">
-			<h1 style="color:black;">Bienvenue sur aTq-App</h1>
+		<div class="conteneur" style="padding-left:10px;">
+			<h1>Bienvenue à l'administration de aTq-App</h1>
+			<div id="controller-list" role="navigation" style="padding-left:30px;">
+				<h2>Gestion</h2>
+				<ul>
+					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+						<li class="controller"><g:link controller="${c.logicalPropertyName}">Gestion ${c.name}</g:link></li>
+					</g:each>
+				</ul>
+			</div>
 		</div>
 	</body>
 </html>
