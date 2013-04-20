@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 div.conteneur{
-	text-align:center;
+	/*text-align:center;*/
 	min-height:500px;
 }
 div.menu{
