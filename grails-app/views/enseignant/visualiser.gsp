@@ -17,7 +17,7 @@
          ${"]);" }
         
         var options = {
-          title: 'Statistiques des réponses à la question'
+          title: '${question.contenu}'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -27,12 +27,9 @@
 	
 	</head>
 	<body>
-		<div class="accueil">
+		<div class="conteneur">
 			<g:render template="menu"></g:render>
 			<g:if test="${question!=null }">
-				<div>Question Posée : ${question.contenu }</div>
-				<div>Nombre de choix totale: ${choixTotal }</div>
-				<div>Nombre de réponses totale : ${repTotal }</div>
 				
 				<div id="chart_div" style="width: 900px; height: 500px;"></div>
 				

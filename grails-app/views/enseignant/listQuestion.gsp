@@ -9,7 +9,7 @@
 	
 	</head>
 	<body>
-		<div class="accueil">
+		<div class="conteneur">
 		<g:render template="menu"></g:render>
 		<table border="1">
 			<tr><th>Date de création</th><th>Question</th><th>Actions</th></tr>

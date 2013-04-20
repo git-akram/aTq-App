@@ -108,6 +108,7 @@ class EnseignantController {
 	}
 	
 	def listQuestion(Long id){
+
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')
 		[id:id , questionList:Question.findAllByEnseignantAndCours(Enseignant.get(session.userId),Cours.get(id)).sort{[it.dateCreation] ? -1 : 1 }]

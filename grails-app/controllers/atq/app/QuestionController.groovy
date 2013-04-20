@@ -100,6 +100,29 @@ class QuestionController {
         }
     }
 	
+	def showrespcom={
+		if(session.userLogin==null || session.userPassword==null)
+			redirect(controller='Utilisateur' , action= 'logout')
+		
+		//def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
+		def cours=Cours.get(params.idc)
+		def ens=Enseignant.get(params.ide)
+	
+	
+		[listQuestions:Question.findAllByCoursAndEnseignant(cours,ens)]
+		
+	}
+	
+	def showquestact={
+		
+		if(session.userLogin==null || session.userPassword==null)
+			redirect(controller='Utilisateur' , action= 'logout')
+
+		def cours=Cours.get(params.idc)
+		def ens=Enseignant.get(params.ide)
+		[questionCourante:Question.findByCoursAndEnseignantAndAPoser(cours,ens,true) , params:params]
+	}
+	
 	def newQuestion(Long id){
 		[id:id]
 	}
@@ -158,6 +181,7 @@ class QuestionController {
 		}
 			
 		def question = Question.get(params.idQuestion)
+		def listChoix= ReponsePropose.findAllByQuestion(question)
 		
 		def questionInstance=new Question(contenu : question.contenu ,
 										dateCreation : new Date() ,
@@ -166,6 +190,14 @@ class QuestionController {
 										enseignant : question.enseignant )
 		
 		questionInstance.save()
+		
+		for(c in listChoix){			
+			def choix = new ReponsePropose(intitule : c.intitule,question : questionInstance)
+			if(!choix.save()) {choix.errors.allErrors.each({e->println e})}
+			questionInstance.addToReponsePropose(choix)
+			questionInstance.save()
+		}
+		
 		redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
 	}
 	
@@ -194,4 +226,28 @@ class QuestionController {
 			redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
 		}
 	}
+	
+	def addReponse(){
+		def quest=Question.get(params.idQuestion)
+		def etud=Etudiant.get(params.idEtudiant)
+		def rep=ReponsePropose.get(params.choix)
+		if(quest.isaPoser()==true){
+			if(Reponse.findByEtudiantAndQuestion(etud,quest)==null){
+				def reponse=new Reponse(
+						question: quest,
+						etudiant: etud,
+						reponsePropose: rep,
+						)
+				reponse.save()
+				flash.message = "Votre réponse a été prise en compte"
+			}
+			else
+				flash.message = "Vous avez déjà répondu à cette question"
+		}
+		else
+			flash.message = "Votre réponse n'a pas été prise en compte"
+			
+		redirect(controller:'Etudiant',action:'accueil')	
+	}
 }
+

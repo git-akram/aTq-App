@@ -106,4 +106,12 @@ class EtudiantController {
 		def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
 		[listInscriptions:InscriptionAuCours.findAllByUtilisateur(utilisateur)]
 	}
+	
+	def menu={
+		if(session.userLogin==null || session.userPassword==null)
+			redirect(controller='Utilisateur' , action= 'logout')
+		[params: params]	
+	}
+
 }
+
