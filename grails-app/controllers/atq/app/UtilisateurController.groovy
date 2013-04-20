@@ -118,7 +118,10 @@ class UtilisateurController {
 				redirect(controller:'Etudiant' , action:'accueil')
 			}
 			else
-				redirect(action: 'accueil')
+				if(utilisateur.isAdmin!=true)
+					redirect(action: 'accueil')
+				else
+					render(view:"administration")
 		}
 	}
 	

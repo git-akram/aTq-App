@@ -23,7 +23,9 @@
 	</head>
 	<body>
 		<div id="header">
-			
+			<div style="float:left;padding-top:3px;">
+				<img src="${resource(dir: 'images', file: 'logo.png')}"/>
+			</div>
 			<div style="float:right;padding:4px;">
 				<g:if test="${session.userLogin==null}">
 					<g:link controller="Utilisateur" action="login">Connexion</g:link>
@@ -35,7 +37,7 @@
 			</div>
 		</div>
 		<g:layoutBody/>
-		<div class="footer" role="contentinfo">aTq-App</div>
+		<div class="footer" role="contentinfo"><h3>aTq-App</h3></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>
 		<r:layoutResources />
