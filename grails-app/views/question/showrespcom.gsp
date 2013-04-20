@@ -13,22 +13,19 @@
 	
 	</head>
 	<body>
-		<div class="accueil" align="center">
-			<table align="center">
-			<tr><th>reponse</th><th>Commentaire</th></tr>	
+		<div class="conteneur">
+			<g:render template="/Etudiant/menu"></g:render>
+			<table border="1">
+			<tr><th>Question</th><th>reponse</th><th>Commentaire</th></tr>	
 				<g:each in="${listQuestions}" status="i" var="questionInstance">
 					<tr>
-					
-					
-
-								
-									
-									<td>${Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)).reponsePropose.intitule}</td>
-									<g:if test="${Commentaire.findByReponse(Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)))!=null }">
-									<td>${Commentaire.findByReponse(Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword))).intitule}</td>
-									</g:if>
-									
-					
+						<g:if test="${Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword))!=null}">
+							<td>${ questionInstance.contenu}</td>
+							<td>${Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)).reponsePropose.intitule}</td>
+						</g:if>
+						<g:if test="${Commentaire.findByReponse(Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)))!=null }">
+							<td>${Commentaire.findByReponse(Reponse.findByQuestionAndEtudiant(questionInstance,Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword))).intitule}</td>
+						</g:if>
 					</tr>		
 				</g:each>
 			</table>	

@@ -1,11 +1,28 @@
 @CHARSET "UTF-8";
-table.table-enseignant{
-	width:auto;
-	align:center;
+
+div.conteneur{
+	text-align:center;
+	min-height:500px;
 }
-table.table-enseignant.th{
-	font:bold;
+div.menu{
+	height:50px;
+	background: #0088CC;
+	text-align: center;
+	margin-bottom:20px;
 }
-div.accueil{
-	align:center;
+a.lienMenu
+{
+	display: inline-block ;
+	text-decoration: none;
+	height: 50px;
+	line-height: 50px;
+	width: auto;
+	text-align: center;	
+	padding:0px 10px;
+	color: white;
+}
+a.lienMenu:hover{
+	background:#EDF7FC;
+	color:#0088CC
+	
 }

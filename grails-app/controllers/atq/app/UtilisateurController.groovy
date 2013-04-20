@@ -112,15 +112,16 @@ class UtilisateurController {
 			session.userPassword=params.password
 			session.userName=utilisateur.nom+" "+utilisateur.prenom
 			if(utilisateur.isEnseignant()){
-				flash.message = "Enseignant"
 				redirect(controller:'Enseignant' , action:'accueil')
 			}
 			else if(utilisateur.isEtudiant()){
-				flash.message = "Etudiant"
 				redirect(controller:'Etudiant' , action:'accueil')
 			}
 			else
-				redirect(action: 'accueil')
+				if(utilisateur.isAdmin!=true)
+					redirect(action: 'accueil')
+				else
+					render(view:"administration")
 		}
 	}
 	

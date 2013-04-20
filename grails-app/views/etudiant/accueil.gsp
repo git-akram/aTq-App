@@ -11,9 +11,9 @@
 	</head>
 	<body>
 	<div class="message">${flash.message}</div>
-		<div class="accueil" align="center">
-			<table align="center">
-			<tr><td>Cours</td><td>Enseignants</td></tr>	
+		<div class="conteneur">
+			<table border="1">
+			<tr><th>Cours</th><th>Enseignants</th></tr>	
 				<g:each in="${listInscriptions}" status="i" var="coursInstance">
 					<tr>
 					<td>${fieldValue(bean: coursInstance.cours, field: "libelle")}</td>
@@ -21,7 +21,7 @@
 							<g:each in="${InscriptionAuCours.findAllByCours(coursInstance.cours).utilisateur}" status="j" var="enseignantInstance">
 								<g:if test="${enseignantInstance.isEnseignant()}">
 
-									<g:link action="menu" params="[idCours:coursInstance.cours.id,idEnseignant:enseignantInstance.id]">
+									<g:link controller="Question" action="showquestact" params="[idc:coursInstance.cours.id,ide:enseignantInstance.id]">
 
 									${fieldValue(bean: enseignantInstance, field: "nom")}&nbsp;
 									${fieldValue(bean: enseignantInstance, field: "prenom")}

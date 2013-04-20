@@ -107,32 +107,40 @@ class EnseignantController {
 		[listInscriptions:InscriptionAuCours.findAllByUtilisateur(utilisateur)]
 	}
 	
-	def menu(Long id){
-		if(session.userLogin==null || session.userPassword==null)
-			redirect(controller='Utilisateur' , action= 'logout')
-		[id:id]
-	}
-
-
-	def declencher(Long id){
-
-	}
 	def listQuestion(Long id){
 
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')
-		[id:id , questionList:Question.findAllByEnseignantAndCours(Enseignant.get(session.userId),Cours.get(id)).sort{[it.dateCreation]}]
+		[id:id , questionList:Question.findAllByEnseignantAndCours(Enseignant.get(session.userId),Cours.get(id)).sort{[it.dateCreation] ? -1 : 1 }]
 		
 	}
 	
 	def visualiser(Long id){
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')
-		def question=Question.findByAPoser(true)
-		//if(question!=null)
-			def listReponse=Reponse.findAllByQuestion(Question.get(question.id))
-		[id:id,question:question,listReponse:listReponse]
+			
+		def question=Question.get(params.idQuestion)
 		
+		if(question!=null){
+			
+			def repParChoix=[:]
+			for(choix in ReponsePropose.findAllByQuestion(question)){
+				repParChoix[choix.id]=[intitule:choix.intitule , nbr:Reponse.findAllByQuestionAndReponsePropose(question,choix).size() ]
+			}
+
+			def stat=""
+			for(choix in repParChoix){
+				stat+=",['"+choix.value.intitule+"' , "+choix.value.nbr+"]"	
+			}
+			
+			def listReponse=Reponse.findAllByQuestion(Question.get(question.id))
+			def repTotal=listReponse.size()
+			def choixTotal=repParChoix.size()
+			
+			[id:id,question:question,listReponse:listReponse,repTotal:repTotal,choixTotal:choixTotal,stat:stat]
+		}
+		else
+			[id:id,question:question]	
 	}
 	
 }

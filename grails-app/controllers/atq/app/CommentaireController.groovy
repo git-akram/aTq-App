@@ -99,4 +99,23 @@ class CommentaireController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def newCommentaire(Long id){
+		[id:id , params:params]	
+	}
+	
+	def saveCommentaire(Long id){
+		if(session.userLogin==null || session.userPassword==null)
+		redirect(controller='Utilisateur' , action= 'logout')
+		
+		println(params.intitule+" and "+params.idReponse)
+		def commentaireInstance=new Commentaire(intitule: params.intitule, reponse : Reponse.get(params.idReponse))
+		if (!commentaireInstance.save(flush: true)) {
+			render(view: 'newCommentaire', model: [commentaireInstance: commentaireInstance], id:id , params:params)
+			return
+		}
+	
+		flash.message = message(code: 'default.created.message', args: [message(code: 'commentaire.label', default: 'Commentaire'), commentaireInstance.id])
+		redirect(controller:'Enseignant' , action:'visualiser', id:id , params:params )
+	}
 }

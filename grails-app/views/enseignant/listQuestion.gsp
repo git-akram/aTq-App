@@ -1,3 +1,4 @@
+<%@ page import="atq.app.Question" %>
 <html>
 	<head>
 	<meta name="layout" content="main"/>
@@ -8,7 +9,8 @@
 	
 	</head>
 	<body>
-		<div class="accueil">
+		<div class="conteneur">
+		<g:render template="menu"></g:render>
 		<table border="1">
 			<tr><th>Date de création</th><th>Question</th><th>Actions</th></tr>
 			<g:each in="${questionList}" status="i" var="questionInstance">
@@ -17,11 +19,15 @@
 					<td><g:link>${questionInstance.contenu}</g:link></td>
 					<td>
 						<g:if test="${questionInstance.aPoser == false }">
-							<g:link controller ="Question" action="declencher" id="${questionInstance.id}" params="[idCours:id]">Déclencher</g:link>
+							<g:link controller="Question" action="declencher" id="${id }" params="[idQuestion:questionInstance.id]">Déclencher</g:link>
 						</g:if>
 						<g:if test="${questionInstance.aPoser == true }">
-							<g:link controller ="Question" action="cloturer" id="${questionInstance.id}" params="[idCours:id]">Clôturer</g:link>
+							<g:link controller="Question" action="cloturer" id="${id }" params="[idQuestion:questionInstance.id]">Clôturer</g:link>
 						</g:if>
+						&nbsp;
+						<g:link controller="Question" action="supprimer" id="${id }" params="[idQuestion:questionInstance.id]">Supprimer</g:link>
+						&nbsp;
+						<g:link action="visualiser" id="${id }" params="[idQuestion:questionInstance.id]">Visualiser</g:link>
 					</td>
 				</tr>
 			</g:each>

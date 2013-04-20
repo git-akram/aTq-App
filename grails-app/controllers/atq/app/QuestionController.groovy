@@ -102,10 +102,7 @@ class QuestionController {
 	
 	def showrespcom={
 		if(session.userLogin==null || session.userPassword==null)
-		redirect(controller='Utilisateur' , action= 'logout')
-		
-		println(params.idc)
-		println(params.ide)
+			redirect(controller='Utilisateur' , action= 'logout')
 		
 		//def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
 		def cours=Cours.get(params.idc)
@@ -120,19 +117,10 @@ class QuestionController {
 		
 		if(session.userLogin==null || session.userPassword==null)
 			redirect(controller='Utilisateur' , action= 'logout')
-		
-		//println(params.idc)
-		//println(params.ide)
 
 		def cours=Cours.get(params.idc)
-		println(cours)
 		def ens=Enseignant.get(params.ide)
-		println("affichage objet")
-		println(ens)
-		
-		println("affichage question")
-		println(Question.findByCoursAndEnseignantAndAPoser(Cours.get(params.idc),Enseignant.get(params.ide),true))
-		[questionCourante:Question.findByCoursAndEnseignantAndAPoser(cours,ens,true)]
+		[questionCourante:Question.findByCoursAndEnseignantAndAPoser(cours,ens,true) , params:params]
 	}
 	
 	def newQuestion(Long id){
@@ -187,45 +175,79 @@ class QuestionController {
 	}
 	
 	def declencher(Long id){
-		for (q in Question.list()){
+		for (q in Question.findAllByCoursAndEnseignant(Cours.get(id),Enseignant.get(session.userId))){
 			q.setaPoser(false)
 			q.save()
 		}
 			
-		def question = Question.get(id)
-		question.setaPoser(true)
-		question.save()
-		redirect(controller:'Enseignant' , action:'listQuestion' , id:params.idCours)
+		def question = Question.get(params.idQuestion)
+		def listChoix= ReponsePropose.findAllByQuestion(question)
+		
+		def questionInstance=new Question(contenu : question.contenu ,
+										dateCreation : new Date() ,
+										aPoser : true ,
+										cours : question.cours ,
+										enseignant : question.enseignant )
+		
+		questionInstance.save()
+		
+		for(c in listChoix){			
+			def choix = new ReponsePropose(intitule : c.intitule,question : questionInstance)
+			if(!choix.save()) {choix.errors.allErrors.each({e->println e})}
+			questionInstance.addToReponsePropose(choix)
+			questionInstance.save()
+		}
+		
+		redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
 	}
 	
 	def cloturer(Long id){	
-		def question = Question.get(id)
+		def question = Question.get(params.idQuestion)
 		question.setaPoser(false)
 		question.save()
-		redirect(controller:'Enseignant' , action:'listQuestion' , id:params.idCours)
+		redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
+	}
+	
+	def supprimer(Long id){
+		def questionInstance = Question.get(params.idQuestion)
+		if (!questionInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), params.idQuestion])
+			redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
+			return
+		}
+	
+		try {
+			questionInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'question.label', default: 'Question'), params.idQuestion])
+			redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'question.label', default: 'Question'), params.idQuestion])
+			redirect(controller:'Enseignant' , action:'listQuestion' , id:id)
+		}
 	}
 	
 	def addReponse(){
 		def quest=Question.get(params.idQuestion)
-		println(quest)
 		def etud=Etudiant.get(params.idEtudiant)
-		println(etud)
 		def rep=ReponsePropose.get(params.choix)
 		if(quest.isaPoser()==true){
-			
-			def reponse=new Reponse(
-				question: quest,
-				etudiant: etud,
-				reponsePropose: rep,
-				)
+			if(Reponse.findByEtudiantAndQuestion(etud,quest)==null){
+				def reponse=new Reponse(
+						question: quest,
+						etudiant: etud,
+						reponsePropose: rep,
+						)
 				reponse.save()
-				flash.message = "Votre reponse a été pris en compte"
-		
-		}else
-				flash.message = "Votre reponse n'a pas été pris en compte"
-			redirect(controller:'Etudiant',action:'accueil')
-		
-		
+				flash.message = "Votre réponse a été prise en compte"
+			}
+			else
+				flash.message = "Vous avez déjà répondu à cette question"
+		}
+		else
+			flash.message = "Votre réponse n'a pas été prise en compte"
+			
+		redirect(controller:'Etudiant',action:'accueil')	
 	}
 }
 
