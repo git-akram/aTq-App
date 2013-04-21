@@ -120,10 +120,6 @@ img {
 	text-align: center;
 }
 
-.footer a {
-	color: #255b17;
-}
-
 .spinner {
 	background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
 	height: 16px;
