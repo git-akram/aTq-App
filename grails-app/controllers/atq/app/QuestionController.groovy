@@ -101,10 +101,10 @@ class QuestionController {
     }
 	
 	def showrespcom={
-		if(session.userLogin==null || session.userPassword==null)
+		def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
+		if(utilisateur==null)
 			redirect(controller='Utilisateur' , action= 'logout')
 		
-		//def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
 		def cours=Cours.get(params.idc)
 		def ens=Enseignant.get(params.ide)
 	
@@ -114,8 +114,8 @@ class QuestionController {
 	}
 	
 	def showquestact={
-		
-		if(session.userLogin==null || session.userPassword==null)
+		def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
+		if(utilisateur==null)
 			redirect(controller='Utilisateur' , action= 'logout')
 
 		def cours=Cours.get(params.idc)
@@ -128,6 +128,7 @@ class QuestionController {
 	}
 	
 	def affectReponse(Long id){
+		
 		[id:id]
 		boolean aPoser
 		if(params.aPoser=='Oui'){

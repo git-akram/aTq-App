@@ -16,7 +16,7 @@
 			<g:each in="${questionList}" status="i" var="questionInstance">
 				<tr>
 					<td>${questionInstance.dateCreation}</td>
-					<td><g:link>${questionInstance.contenu}</g:link></td>
+					<td><g:link action="visualiser" id="${id }" params="[idQuestion:questionInstance.id]">${questionInstance.contenu}</g:link></td>
 					<td>
 						<g:if test="${questionInstance.aPoser == false }">
 							<g:link controller="Question" action="declencher" id="${id }" params="[idQuestion:questionInstance.id]">Déclencher</g:link>

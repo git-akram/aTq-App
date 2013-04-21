@@ -101,22 +101,23 @@ class EnseignantController {
     }
 	
 	def accueil={
-		if(session.userLogin==null || session.userPassword==null)
-			redirect(controller='Utilisateur' , action= 'logout')
 		def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
+		if(utilisateur==null)
+			redirect(controller='Utilisateur' , action= 'logout')
 		[listInscriptions:InscriptionAuCours.findAllByUtilisateur(utilisateur)]
 	}
 	
 	def listQuestion(Long id){
-
-		if(session.userLogin==null || session.userPassword==null)
+		def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
+		if(utilisateur==null)
 			redirect(controller='Utilisateur' , action= 'logout')
 		[id:id , questionList:Question.findAllByEnseignantAndCours(Enseignant.get(session.userId),Cours.get(id)).sort{[it.dateCreation] ? -1 : 1 }]
 		
 	}
 	
 	def visualiser(Long id){
-		if(session.userLogin==null || session.userPassword==null)
+		def utilisateur=Utilisateur.findByLoginAndPassword(session.userLogin,session.userPassword)
+		if(utilisateur==null)
 			redirect(controller='Utilisateur' , action= 'logout')
 			
 		def question=Question.get(params.idQuestion)

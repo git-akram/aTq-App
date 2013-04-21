@@ -15,10 +15,10 @@
 				<div class="message">${flash.message}</div>
 				<g:form class="formular" action="saveCommentaire" id="${id}" params="${[idQuestion:params.idQuestion , idReponse:params.idReponse]}">
 						<label for="intitule">
-							<g:message code="commentaire.intitule.label" default="Intitule" />
+							<g:message code="commentaire.intitule.label" default="Commentaire" />
 							<span class="required-indicator">*</span>
 						</label>
-						<g:textField name="intitule" required="" value=""/>
+						<g:textArea name="intitule" required="" value=""/>
 					<br/>
 					<g:submitButton name="create" value="Ajouter" />
 				</g:form>	
